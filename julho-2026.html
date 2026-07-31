@@ -43,9 +43,7 @@
   .title-sub{ margin-top:16px; font-size:15px; color:var(--muted); max-width:480px; line-height:1.5; }
 
   /* ---------- MINI CALENDÁRIO (visão rápida do mês, com bolinhas por canal) ---------- */
-  .mini-cal{ padding:0 0 34px; border-top:1px solid var(--line); padding-top:34px; }
-  .mini-cal-head{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:10px 20px; margin-bottom:16px; }
-  .mini-cal-legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--muted); }
+  .mini-cal-legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--muted); margin-bottom:16px; }
   .mini-cal-legend .key{ display:flex; align-items:center; gap:5px; }
   .mini-cal-legend .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
   .cal-grid{ display:grid; grid-template-columns:repeat(7, 1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); border-radius:8px; overflow:hidden; }
@@ -266,17 +264,16 @@
   </div>
 
   <!-- MINI CALENDÁRIO -->
-  <div class="mini-cal">
-    <div class="mini-cal-head">
-      <div class="eyebrow" style="margin-bottom:0;">Calendário do mês</div>
-      <div class="mini-cal-legend">
-        <span class="key"><span class="dot" style="background:var(--azul)"></span>E-mail</span>
-        <span class="key"><span class="dot" style="background:var(--neon)"></span>WhatsApp</span>
-        <span class="key"><span class="dot" style="background:var(--laranja)"></span>SMS</span>
-        <span class="key"><span class="dot" style="background:var(--chumbo)"></span>Post</span>
-        <span class="key"><span class="dot" style="background:var(--muted)"></span>Story</span>
-        <span class="key"><span class="dot" style="background:transparent;border:1.5px solid var(--chumbo)"></span>Collab</span>
-      </div>
+  <details class="mini-cal week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">▦</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Calendário do mês</span></span></summary>
+    <div class="section-inner">
+    <div class="mini-cal-legend">
+      <span class="key"><span class="dot" style="background:var(--azul)"></span>E-mail</span>
+      <span class="key"><span class="dot" style="background:var(--neon)"></span>WhatsApp</span>
+      <span class="key"><span class="dot" style="background:var(--laranja)"></span>SMS</span>
+      <span class="key"><span class="dot" style="background:var(--chumbo)"></span>Post</span>
+      <span class="key"><span class="dot" style="background:var(--muted)"></span>Story</span>
+      <span class="key"><span class="dot" style="background:transparent;border:1.5px solid var(--chumbo)"></span>Collab</span>
     </div>
     <div class="cal-grid" id="monthCalendar" data-month="07">
       <div class="cal-weekday">Seg</div>
@@ -322,7 +319,8 @@
       <div class="cal-cell is-blank"></div>
       <div class="cal-cell is-blank"></div>
     </div>
-  </div>
+    </div>
+  </details>
 
   <!-- PONTOS DE CONTATO -->
   <div class="section">

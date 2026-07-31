@@ -60,6 +60,7 @@
   .cal-dot.laranja{ background:var(--laranja); }
   .cal-dot.chumbo{ background:var(--chumbo); }
   .cal-dot.outline{ background:transparent; border:1.5px solid var(--chumbo); }
+  .cal-dot.story{ background:var(--muted); }
   @media (max-width:640px){
     .cal-cell{ min-height:40px; padding:4px; }
     .cal-weekday{ font-size:8px; padding:4px 2px; }
@@ -272,7 +273,8 @@
         <span class="key"><span class="dot" style="background:var(--azul)"></span>E-mail</span>
         <span class="key"><span class="dot" style="background:var(--neon)"></span>WhatsApp</span>
         <span class="key"><span class="dot" style="background:var(--laranja)"></span>SMS</span>
-        <span class="key"><span class="dot" style="background:var(--chumbo)"></span>Orgânico</span>
+        <span class="key"><span class="dot" style="background:var(--chumbo)"></span>Post</span>
+        <span class="key"><span class="dot" style="background:var(--muted)"></span>Story</span>
         <span class="key"><span class="dot" style="background:transparent;border:1.5px solid var(--chumbo)"></span>Collab</span>
       </div>
     </div>
@@ -956,6 +958,7 @@
         return tagEl.classList.contains(c);
       });
       if (!colorCls) return;
+      if (colorCls === 'chumbo' && dateEl.textContent.indexOf('Story') !== -1) colorCls = 'story';
       var dot = document.createElement('span');
       dot.className = 'cal-dot ' + colorCls;
       dotsWrap.appendChild(dot);

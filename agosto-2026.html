@@ -42,6 +42,29 @@
   h1 .accent{ color:var(--azul); }
   .title-sub{ margin-top:16px; font-size:15px; color:var(--muted); max-width:480px; line-height:1.5; }
 
+  /* ---------- MINI CALENDÁRIO (visão rápida do mês, com bolinhas por canal) ---------- */
+  .mini-cal{ padding:0 0 34px; border-top:1px solid var(--line); padding-top:34px; }
+  .mini-cal-head{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:10px 20px; margin-bottom:16px; }
+  .mini-cal-legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--muted); }
+  .mini-cal-legend .key{ display:flex; align-items:center; gap:5px; }
+  .mini-cal-legend .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7, 1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .cal-weekday{ font-family:'Space Grotesk', sans-serif; font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); text-align:center; padding:8px 4px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:rgba(60,60,59,0.03); }
+  .cal-cell{ min-height:62px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:6px 6px 8px; display:flex; flex-direction:column; gap:6px; }
+  .cal-cell.is-blank{ background:rgba(60,60,59,0.025); }
+  .cal-daynum{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:600; color:var(--muted); }
+  .cal-dots{ display:flex; flex-wrap:wrap; gap:3px; }
+  .cal-dot{ width:7px; height:7px; border-radius:50%; flex:none; }
+  .cal-dot.azul{ background:var(--azul); }
+  .cal-dot.neon{ background:var(--neon); }
+  .cal-dot.laranja{ background:var(--laranja); }
+  .cal-dot.chumbo{ background:var(--chumbo); }
+  .cal-dot.outline{ background:transparent; border:1.5px solid var(--chumbo); }
+  @media (max-width:640px){
+    .cal-cell{ min-height:40px; padding:4px; }
+    .cal-weekday{ font-size:8px; padding:4px 2px; }
+  }
+
   .section{ display:grid; grid-template-columns:220px 1fr; gap:32px; padding:34px 0; border-top:1px solid var(--line); }
 
   details.week-toggle{ padding:20px 0; border-top:1px solid var(--line); }
@@ -246,6 +269,71 @@
   <div class="title-block">
     <div class="kicker">Resumo mensal · gestão de marca</div>
     <h1>Ações de<br><span class="accent">Agosto</span></h1>
+  </div>
+
+  <!-- MINI CALENDÁRIO -->
+  <div class="mini-cal">
+    <div class="mini-cal-head">
+      <div class="eyebrow" style="margin-bottom:0;">Calendário do mês</div>
+      <div class="mini-cal-legend">
+        <span class="key"><span class="dot" style="background:var(--azul)"></span>E-mail</span>
+        <span class="key"><span class="dot" style="background:var(--neon)"></span>WhatsApp</span>
+        <span class="key"><span class="dot" style="background:var(--laranja)"></span>SMS</span>
+        <span class="key"><span class="dot" style="background:var(--chumbo)"></span>Orgânico</span>
+        <span class="key"><span class="dot" style="background:transparent;border:1.5px solid var(--chumbo)"></span>Collab</span>
+      </div>
+    </div>
+    <div class="cal-grid" id="monthCalendar" data-month="08">
+      <div class="cal-weekday">Seg</div>
+      <div class="cal-weekday">Ter</div>
+      <div class="cal-weekday">Qua</div>
+      <div class="cal-weekday">Qui</div>
+      <div class="cal-weekday">Sex</div>
+      <div class="cal-weekday">Sáb</div>
+      <div class="cal-weekday">Dom</div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell" data-day="01"><span class="cal-daynum">01</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="02"><span class="cal-daynum">02</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="03"><span class="cal-daynum">03</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="04"><span class="cal-daynum">04</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="05"><span class="cal-daynum">05</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="06"><span class="cal-daynum">06</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="07"><span class="cal-daynum">07</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="08"><span class="cal-daynum">08</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="09"><span class="cal-daynum">09</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="10"><span class="cal-daynum">10</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="11"><span class="cal-daynum">11</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="12"><span class="cal-daynum">12</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="13"><span class="cal-daynum">13</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="14"><span class="cal-daynum">14</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="15"><span class="cal-daynum">15</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="16"><span class="cal-daynum">16</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="17"><span class="cal-daynum">17</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="18"><span class="cal-daynum">18</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="19"><span class="cal-daynum">19</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="20"><span class="cal-daynum">20</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="21"><span class="cal-daynum">21</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="22"><span class="cal-daynum">22</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="23"><span class="cal-daynum">23</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="24"><span class="cal-daynum">24</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="25"><span class="cal-daynum">25</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="26"><span class="cal-daynum">26</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="27"><span class="cal-daynum">27</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="28"><span class="cal-daynum">28</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="29"><span class="cal-daynum">29</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="30"><span class="cal-daynum">30</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="31"><span class="cal-daynum">31</span><span class="cal-dots"></span></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+    </div>
   </div>
 
   <!-- PONTOS DE CONTATO -->
@@ -529,6 +617,31 @@
     var countEl = card.querySelector('.count');
     if (countEl) countEl.textContent = count;
   });
+
+  // Mini calendário: lê os cards de post-grid já existentes na página e
+  // desenha uma bolinha por card no dia correspondente, colorida pelo canal.
+  var monthCal = document.getElementById('monthCalendar');
+  if (monthCal) {
+    var calMonth = monthCal.getAttribute('data-month');
+    document.querySelectorAll('.post-grid .post-card').forEach(function(card){
+      var dateEl = card.querySelector('.post-date');
+      if (!dateEl) return;
+      var m = dateEl.textContent.match(/^(\d{2})\/(\d{2})/);
+      if (!m || m[2] !== calMonth) return;
+      var cell = monthCal.querySelector('.cal-cell[data-day="' + m[1] + '"]');
+      if (!cell) return;
+      var dotsWrap = cell.querySelector('.cal-dots');
+      var tagEl = card.querySelector('.post-tags .tag');
+      if (!dotsWrap || !tagEl) return;
+      var colorCls = ['azul','neon','laranja','chumbo','outline'].find(function(c){
+        return tagEl.classList.contains(c);
+      });
+      if (!colorCls) return;
+      var dot = document.createElement('span');
+      dot.className = 'cal-dot ' + colorCls;
+      dotsWrap.appendChild(dot);
+    });
+  }
 </script>
 </body>
 </html>

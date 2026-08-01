@@ -173,11 +173,22 @@
     text-transform:uppercase; padding:3px 8px; border-radius:999px; white-space:nowrap;
   }
   .tag.chumbo{ background:var(--chumbo); color:var(--off-white); }
+  .tag.territorio{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
   .status{ font-size:9.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
   .status.publicado{ background:var(--neon); color:var(--chumbo); }
   .status.producao{ background:transparent; color:var(--muted); border:1px solid var(--line); }
   .status.enviado{ background:var(--neon); color:var(--chumbo); }
   .status.agendado{ background:transparent; color:var(--azul); border:1px solid var(--azul); }
+
+  /* ---------- TERRITÓRIOS DO MÊS (agrupamento automático por tema/território) ---------- */
+  .territory-group{ margin-bottom:18px; }
+  .territory-group:last-child{ margin-bottom:0; }
+  .territory-group-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:8px; }
+  .territory-group-name{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:.02em; }
+  .territory-group-count{ font-size:12px; color:var(--muted); }
+  .territory-items{ display:flex; flex-wrap:wrap; gap:6px; }
+  .territory-item{ font-size:12px; padding:4px 10px; border-radius:999px; background:rgba(60,60,59,0.05); color:var(--chumbo); }
+  .territory-empty{ font-size:13px; color:var(--muted); font-style:italic; }
 
   /* other-channel simple list (email/whatsapp/sms/influ/trafego placeholders) */
   .action-list{ list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
@@ -331,6 +342,14 @@
     </div>
   </details>
 
+  <!-- TERRITÓRIOS DO MÊS -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">◆</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Territórios do mês</span><span class="week-range-inline">Temas e modelos trabalhados, agrupados por território.</span></span></summary>
+    <div class="section-inner">
+    <div class="territory-list" id="territoryList"></div>
+    </div>
+  </details>
+
   <!-- PONTOS DE CONTATO -->
   <details class="section week-toggle" open>
     <summary class="week-summary"><span class="week-marker-group"><span class="marker">◎</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Pontos de contato</span><span class="week-range-inline">Canais utilizados nas ações de comunicação da marca ao longo do mês.</span></span></summary>
@@ -375,7 +394,7 @@
           <div class="post-body">
             <div class="post-date">01/08 · Carrossel</div>
             <div class="post-title">Bruk noturno 2</div>
-            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag territorio">Produto</span><span class="status producao">Em produção</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -452,7 +471,7 @@
           <div class="post-body">
             <div class="post-date">10/08 · Collab</div>
             <div class="post-title">Marina Buck</div>
-            <div class="post-tags"><span class="tag outline">Collab</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag outline">Collab</span><span class="tag territorio">Educativo</span><span class="status producao">Em produção</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -460,7 +479,7 @@
           <div class="post-body">
             <div class="post-date">12/08 · Collab</div>
             <div class="post-title">Sidnei</div>
-            <div class="post-tags"><span class="tag outline">Collab</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag outline">Collab</span><span class="tag territorio">Comunidade</span><span class="status producao">Em produção</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -468,7 +487,7 @@
           <div class="post-body">
             <div class="post-date">14/08 · Collab</div>
             <div class="post-title">Athayogin</div>
-            <div class="post-tags"><span class="tag outline">Collab</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag outline">Collab</span><span class="tag territorio">Comunidade</span><span class="status producao">Em produção</span></div>
           </div>
         </div>
       </div>
@@ -614,6 +633,60 @@
       dot.className = 'cal-dot ' + colorCls;
       dotsWrap.appendChild(dot);
     });
+  }
+
+  // Territórios do mês: agrupa todos os cards que tiverem uma tag
+  // ".tag.territorio" pelo texto dela, listando os títulos de cada grupo.
+  var territoryList = document.getElementById('territoryList');
+  if (territoryList) {
+    var groups = {};
+    document.querySelectorAll('.post-grid .post-card').forEach(function(card){
+      var terrEl = card.querySelector('.tag.territorio');
+      if (!terrEl) return;
+      var name = terrEl.textContent.trim();
+      if (!name) return;
+      var titleEl = card.querySelector('.post-title');
+      var title = titleEl ? titleEl.textContent.trim() : '(sem título)';
+      if (!groups[name]) groups[name] = [];
+      groups[name].push(title);
+    });
+    var names = Object.keys(groups).sort();
+    if (names.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'territory-empty';
+      empty.textContent = 'Nenhum post com território definido ainda.';
+      territoryList.appendChild(empty);
+    } else {
+      names.forEach(function(name){
+        var items = groups[name];
+        var group = document.createElement('div');
+        group.className = 'territory-group';
+
+        var head = document.createElement('div');
+        head.className = 'territory-group-head';
+        var nameEl = document.createElement('span');
+        nameEl.className = 'territory-group-name';
+        nameEl.textContent = name;
+        var countEl = document.createElement('span');
+        countEl.className = 'territory-group-count';
+        countEl.textContent = '(' + items.length + ')';
+        head.appendChild(nameEl);
+        head.appendChild(countEl);
+
+        var itemsWrap = document.createElement('div');
+        itemsWrap.className = 'territory-items';
+        items.forEach(function(t){
+          var chip = document.createElement('span');
+          chip.className = 'territory-item';
+          chip.textContent = t;
+          itemsWrap.appendChild(chip);
+        });
+
+        group.appendChild(head);
+        group.appendChild(itemsWrap);
+        territoryList.appendChild(group);
+      });
+    }
   }
 </script>
 </body>

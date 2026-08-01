@@ -101,11 +101,6 @@
   .tp-bottom{ display:flex; align-items:flex-end; justify-content:space-between; gap:8px; }
   .tp-bottom .name{ flex:1 1 auto; min-width:0; }
   .tp-card .count{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; line-height:1; opacity:.9; flex:none; white-space:nowrap; }
-  .tp-split{ display:flex; gap:14px; flex:none; }
-  .tp-split .stat{ display:flex; flex-direction:column; align-items:flex-start; gap:2px; }
-  .tp-split .stat .count{ font-size:19px; }
-  .tp-split .stat .stat-label{ font-size:9px; text-transform:uppercase; letter-spacing:.03em; opacity:.75; }
-  .tp-chumbo .tp-bottom{ flex-direction:column; align-items:flex-start; gap:10px; }
   .tp-azul{ background:var(--azul); color:#fff; }
   .tp-neon{ background:var(--neon); color:var(--chumbo); }
   .tp-laranja{ background:var(--laranja); color:#fff; }
@@ -339,15 +334,13 @@
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 18h4"/></svg></span>
         <div class="tp-bottom"><span class="name">SMS</span><span class="count">0</span></div>
       </div>
-      <div class="tp-card tp-chumbo" data-count-tag="chumbo" data-count-text="Orgânico">
+      <div class="tp-card tp-chumbo" data-count-tag="chumbo" data-count-text="Orgânico" data-org-type="post">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
-        <div class="tp-bottom">
-          <span class="name">Posts e stories orgânicos</span>
-          <span class="tp-split">
-            <span class="stat"><span class="count" data-sub="posts">0</span><span class="stat-label">Posts</span></span>
-            <span class="stat"><span class="count" data-sub="stories">0</span><span class="stat-label">Stories</span></span>
-          </span>
-        </div>
+        <div class="tp-bottom"><span class="name">Posts</span><span class="count">0</span></div>
+      </div>
+      <div class="tp-card tp-chumbo" data-count-tag="chumbo" data-count-text="Orgânico" data-org-type="story">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></span>
+        <div class="tp-bottom"><span class="name">Stories</span><span class="count">0</span></div>
       </div>
       <div class="tp-card tp-outline" data-count-tag="outline" data-count-text="Influenciador">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
@@ -912,19 +905,18 @@
     var text = card.getAttribute('data-count-text');
     var els = document.querySelectorAll('.post-grid .tag.' + cls);
 
-    if (cls === 'chumbo') {
-      var posts = 0, stories = 0;
+    var orgType = card.getAttribute('data-org-type');
+    if (orgType) {
+      var count = 0;
       els.forEach(function(el){
         if (el.textContent.trim() !== text) return;
         var body = el.closest('.post-body');
         var dateEl = body ? body.querySelector('.post-date') : null;
         var isStory = dateEl && dateEl.textContent.indexOf('Story') !== -1;
-        if (isStory) { stories++; } else { posts++; }
+        if ((orgType === 'story') === isStory) count++;
       });
-      var postsEl = card.querySelector('[data-sub="posts"]');
-      var storiesEl = card.querySelector('[data-sub="stories"]');
-      if (postsEl) postsEl.textContent = posts;
-      if (storiesEl) storiesEl.textContent = stories;
+      var countEl = card.querySelector('.count');
+      if (countEl) countEl.textContent = count;
       return;
     }
 

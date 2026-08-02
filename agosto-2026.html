@@ -669,7 +669,7 @@
     post: ['post', 'posts'],
     story: ['story', 'stories']
   };
-  var CHANNEL_ORDER = ['collab', 'email', 'whatsapp', 'sms', 'post', 'story'];
+  var CHANNEL_ORDER = ['email', 'whatsapp', 'post', 'collab', 'sms', 'story'];
 
   function renderGroupedSummary(tagClass, containerId, emptyText) {
     var container = document.getElementById(containerId);
@@ -689,7 +689,9 @@
         if (channel) groups[name].byChannel[channel] = (groups[name].byChannel[channel] || 0) + 1;
       });
     });
-    var names = Object.keys(groups).sort();
+    var names = Object.keys(groups).sort(function(a, b){
+      return groups[b].items.length - groups[a].items.length || a.localeCompare(b);
+    });
     if (names.length === 0) {
       var empty = document.createElement('div');
       empty.className = 'territory-empty';

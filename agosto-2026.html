@@ -174,6 +174,7 @@
   }
   .tag.chumbo{ background:var(--chumbo); color:var(--off-white); }
   .tag.territorio{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
+  .tag.produto{ background:transparent; color:var(--muted); border:1px dotted var(--line); }
   .status{ font-size:9.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
   .status.publicado{ background:var(--neon); color:var(--chumbo); }
   .status.producao{ background:transparent; color:var(--muted); border:1px solid var(--line); }
@@ -344,9 +345,17 @@
 
   <!-- TERRITÓRIOS DO MÊS -->
   <details class="section week-toggle" open>
-    <summary class="week-summary"><span class="week-marker-group"><span class="marker">◆</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Territórios do mês</span><span class="week-range-inline">Temas e modelos trabalhados, agrupados por território.</span></span></summary>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">◆</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Territórios do mês</span><span class="week-range-inline">Temas trabalhados, agrupados por território.</span></span></summary>
     <div class="section-inner">
     <div class="territory-list" id="territoryList"></div>
+    </div>
+  </details>
+
+  <!-- PRODUTOS DO MÊS -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">◇</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Produtos do mês</span><span class="week-range-inline">Modelos citados, agrupados por produto.</span></span></summary>
+    <div class="section-inner">
+    <div class="territory-list" id="productList"></div>
     </div>
   </details>
 
@@ -394,7 +403,7 @@
           <div class="post-body">
             <div class="post-date">01/08 · Carrossel</div>
             <div class="post-title">Bruk noturno 2</div>
-            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag territorio">Produto</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag territorio">Produto</span><span class="tag produto">Bruk</span><span class="status producao">Em produção</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -635,59 +644,100 @@
     });
   }
 
-  // Territórios do mês: agrupa todos os cards que tiverem uma tag
-  // ".tag.territorio" pelo texto dela, listando os títulos de cada grupo.
-  var territoryList = document.getElementById('territoryList');
-  if (territoryList) {
+  // Territórios/Produtos do mês: agrupa cards que tiverem uma tag
+  // ".tag.territorio" ou ".tag.produto" pelo texto dela, mostrando
+  // quantos de cada canal (collab/email/whatsapp/sms/post/story) caem
+  // em cada grupo, além da lista de títulos.
+  function detectChannel(card) {
+    var tagEl = card.querySelector('.post-tags .tag');
+    if (!tagEl) return null;
+    if (tagEl.classList.contains('azul')) return 'email';
+    if (tagEl.classList.contains('neon')) return 'whatsapp';
+    if (tagEl.classList.contains('laranja')) return 'sms';
+    if (tagEl.classList.contains('outline')) return 'collab';
+    if (tagEl.classList.contains('chumbo')) {
+      var dateEl = card.querySelector('.post-date');
+      var isStory = dateEl && dateEl.textContent.indexOf('Story') !== -1;
+      return isStory ? 'story' : 'post';
+    }
+    return null;
+  }
+
+  var CHANNEL_LABELS = {
+    collab: ['collab', 'collabs'],
+    email: ['email', 'emails'],
+    whatsapp: ['whatsapp', 'whatsapps'],
+    sms: ['SMS', 'SMS'],
+    post: ['post', 'posts'],
+    story: ['story', 'stories']
+  };
+  var CHANNEL_ORDER = ['collab', 'email', 'whatsapp', 'sms', 'post', 'story'];
+
+  function renderGroupedSummary(tagClass, containerId, emptyText) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
     var groups = {};
     document.querySelectorAll('.post-grid .post-card').forEach(function(card){
-      var terrEl = card.querySelector('.tag.territorio');
-      if (!terrEl) return;
-      var name = terrEl.textContent.trim();
+      var tagEl = card.querySelector('.tag.' + tagClass);
+      if (!tagEl) return;
+      var name = tagEl.textContent.trim();
       if (!name) return;
       var titleEl = card.querySelector('.post-title');
       var title = titleEl ? titleEl.textContent.trim() : '(sem título)';
-      if (!groups[name]) groups[name] = [];
-      groups[name].push(title);
+      var channel = detectChannel(card);
+      if (!groups[name]) groups[name] = { items: [], byChannel: {} };
+      groups[name].items.push(title);
+      if (channel) groups[name].byChannel[channel] = (groups[name].byChannel[channel] || 0) + 1;
     });
     var names = Object.keys(groups).sort();
     if (names.length === 0) {
       var empty = document.createElement('div');
       empty.className = 'territory-empty';
-      empty.textContent = 'Nenhum post com território definido ainda.';
-      territoryList.appendChild(empty);
-    } else {
-      names.forEach(function(name){
-        var items = groups[name];
-        var group = document.createElement('div');
-        group.className = 'territory-group';
-
-        var head = document.createElement('div');
-        head.className = 'territory-group-head';
-        var nameEl = document.createElement('span');
-        nameEl.className = 'territory-group-name';
-        nameEl.textContent = name;
-        var countEl = document.createElement('span');
-        countEl.className = 'territory-group-count';
-        countEl.textContent = '(' + items.length + ')';
-        head.appendChild(nameEl);
-        head.appendChild(countEl);
-
-        var itemsWrap = document.createElement('div');
-        itemsWrap.className = 'territory-items';
-        items.forEach(function(t){
-          var chip = document.createElement('span');
-          chip.className = 'territory-item';
-          chip.textContent = t;
-          itemsWrap.appendChild(chip);
-        });
-
-        group.appendChild(head);
-        group.appendChild(itemsWrap);
-        territoryList.appendChild(group);
-      });
+      empty.textContent = emptyText;
+      container.appendChild(empty);
+      return;
     }
+    names.forEach(function(name){
+      var data = groups[name];
+      var group = document.createElement('div');
+      group.className = 'territory-group';
+
+      var head = document.createElement('div');
+      head.className = 'territory-group-head';
+      var nameEl = document.createElement('span');
+      nameEl.className = 'territory-group-name';
+      nameEl.textContent = name;
+      var breakdown = CHANNEL_ORDER
+        .filter(function(c){ return data.byChannel[c]; })
+        .map(function(c){
+          var n = data.byChannel[c];
+          var pair = CHANNEL_LABELS[c];
+          return n + ' ' + (n === 1 ? pair[0] : pair[1]);
+        })
+        .join(' | ');
+      var countEl = document.createElement('span');
+      countEl.className = 'territory-group-count';
+      countEl.textContent = breakdown || ('(' + data.items.length + ')');
+      head.appendChild(nameEl);
+      head.appendChild(countEl);
+
+      var itemsWrap = document.createElement('div');
+      itemsWrap.className = 'territory-items';
+      data.items.forEach(function(t){
+        var chip = document.createElement('span');
+        chip.className = 'territory-item';
+        chip.textContent = t;
+        itemsWrap.appendChild(chip);
+      });
+
+      group.appendChild(head);
+      group.appendChild(itemsWrap);
+      container.appendChild(group);
+    });
   }
+
+  renderGroupedSummary('territorio', 'territoryList', 'Nenhum post com território definido ainda.');
+  renderGroupedSummary('produto', 'productList', 'Nenhum post com produto definido ainda.');
 </script>
 </body>
 </html>

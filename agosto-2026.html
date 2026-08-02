@@ -187,8 +187,6 @@
   .territory-group-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:8px; }
   .territory-group-name{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:.02em; }
   .territory-group-count{ font-size:12px; color:var(--muted); }
-  .territory-items{ display:flex; flex-wrap:wrap; gap:6px; }
-  .territory-item{ font-size:12px; padding:4px 10px; border-radius:999px; background:rgba(60,60,59,0.05); color:var(--chumbo); }
   .territory-empty{ font-size:13px; color:var(--muted); font-style:italic; }
 
   /* other-channel simple list (email/whatsapp/sms/influ/trafego placeholders) */
@@ -723,17 +721,7 @@
       head.appendChild(nameEl);
       head.appendChild(countEl);
 
-      var itemsWrap = document.createElement('div');
-      itemsWrap.className = 'territory-items';
-      data.items.forEach(function(t){
-        var chip = document.createElement('span');
-        chip.className = 'territory-item';
-        chip.textContent = t;
-        itemsWrap.appendChild(chip);
-      });
-
       group.appendChild(head);
-      group.appendChild(itemsWrap);
       container.appendChild(group);
     });
   }

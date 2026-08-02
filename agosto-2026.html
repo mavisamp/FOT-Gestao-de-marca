@@ -678,16 +678,18 @@
     if (!container) return;
     var groups = {};
     document.querySelectorAll('.post-grid .post-card').forEach(function(card){
-      var tagEl = card.querySelector('.tag.' + tagClass);
-      if (!tagEl) return;
-      var name = tagEl.textContent.trim();
-      if (!name) return;
+      var tagEls = card.querySelectorAll('.tag.' + tagClass);
+      if (!tagEls.length) return;
       var titleEl = card.querySelector('.post-title');
       var title = titleEl ? titleEl.textContent.trim() : '(sem título)';
       var channel = detectChannel(card);
-      if (!groups[name]) groups[name] = { items: [], byChannel: {} };
-      groups[name].items.push(title);
-      if (channel) groups[name].byChannel[channel] = (groups[name].byChannel[channel] || 0) + 1;
+      tagEls.forEach(function(tagEl){
+        var name = tagEl.textContent.trim();
+        if (!name) return;
+        if (!groups[name]) groups[name] = { items: [], byChannel: {} };
+        groups[name].items.push(title);
+        if (channel) groups[name].byChannel[channel] = (groups[name].byChannel[channel] || 0) + 1;
+      });
     });
     var names = Object.keys(groups).sort();
     if (names.length === 0) {

@@ -182,6 +182,7 @@
   .tag.chumbo{ background:var(--chumbo); color:var(--off-white); }
   .tag.territorio{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
   .tag.produto{ background:transparent; color:var(--muted); border:1px dotted var(--line); }
+  .tag.campanha{ background:transparent; color:var(--muted); border:2px double var(--line); }
   .status{ font-size:9.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
   .status.publicado{ background:var(--neon); color:var(--chumbo); }
   .status.producao{ background:transparent; color:var(--muted); border:1px solid var(--line); }
@@ -267,6 +268,14 @@
     <div class="kicker">Resumo mensal · gestão de marca</div>
     <h1>Ações de<br><span class="accent">Julho</span></h1>
   </div>
+
+  <!-- CAMPANHAS -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">✦</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Campanhas</span><span class="week-range-inline">Ações agrupadas por campanha.</span></span></summary>
+    <div class="section-inner">
+    <div class="territory-list" id="campaignList"></div>
+    </div>
+  </details>
 
   <!-- MINI CALENDÁRIO -->
   <details class="mini-cal week-toggle" open>
@@ -618,7 +627,7 @@
           <div class="post-body">
             <div class="post-date">17/07 · E-mail</div>
             <div class="post-title">Email — Início campanha Pais</div>
-            <div class="post-tags"><span class="tag azul">E-mail</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -630,7 +639,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">Oi, {{client_first_name}}!<br>O Dia dos Pais está chegando e a FOT preparou uma seleção especial para presentear aquele pai que merece o melhor. 🖤<br><br>São diversos modelos com até 20% OFF pra você acertar em cheio no presente!<br><br>Clique e confira nossa seleção 👇<br>Grounded together</div>
             </details>
-            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="status publicado">Publicado</span></div>
+            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="tag campanha">Dia dos Pais</span><span class="status publicado">Publicado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -647,7 +656,7 @@
             <div class="post-date">18/07 · Story</div>
             <div class="post-title">Rodrigo Salulima.</div>
             <div class="post-caption placeholder">Story orgânico — campanha de Dia dos Pais. Legenda a definir.</div>
-            <div class="post-tags"><span class="tag chumbo">Story Orgânico</span><span class="status publicado">Publicado</span></div>
+            <div class="post-tags"><span class="tag chumbo">Story Orgânico</span><span class="tag campanha">Dia dos Pais</span><span class="status publicado">Publicado</span></div>
           </div>
         </div>
       </div>
@@ -677,7 +686,7 @@
           <div class="post-body">
             <div class="post-date">20/07 · E-mail</div>
             <div class="post-title">Email — Vendas Pais (Casual) Rudo | Urban | Lito — 20%</div>
-            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="tag produto">Rudo</span><span class="tag produto">Urban</span><span class="tag produto">Lito</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="tag produto">Rudo</span><span class="tag produto">Urban</span><span class="tag produto">Lito</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -689,7 +698,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">Fala, comunidade! 👣<br>O Dia dos Pais está chegando e preparamos uma seleção especial para quem caminha ao nosso lado.<br><br>Liberamos diversos modelos com até 20% OFF no site para você dar um presente que foge do óbvio: mais espaço para os dedos, conforto real e a liberdade do movimento natural.<br><br>Acesse e escolha o presente dele: https://feetoftomorrow.com.br/<br>Grounded together</div>
             </details>
-            <div class="post-tags"><span class="tag outline-neon">Grupo VIP</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag outline-neon">Grupo VIP</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
 <div class="post-card">
@@ -709,7 +718,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">Oi, {{client_first_name}}! 👣<br>Para o pai que curte um look casual e cheio de estilo, a FOT tem a pedida certa!<br><br>Trouxemos os modelos mais versáteis da coleção, todos com 20% OFF pra você garantir o presente perfeito.<br><br>Do dia a dia à aventura, ele vai amar a escolha!<br><br>Confira abaixo. 👇<br>Grounded together</div>
             </details>
-            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -721,7 +730,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">O ambiente em que vivemos nos molda. Aprendemos pelo exemplo de quem caminha ao nosso lado e também pelo chão que pisamos diariamente.<br><br>Afinal, o calçado que você escolhe educa o seu corpo e o seu movimento.<br><br>Neste Dia dos Pais, presenteie quem é a sua maior base com liberdade e contato real com o chão. Temos diversos modelos em promoção no site para você escolher o presente ideal.<br>Grounded together.<br><br>#FeetOfTomorrow #MovimentoBarefoot #BuildYourHealth</div>
             </details>
-            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="status publicado">Publicado</span></div>
+            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag campanha">Dia dos Pais</span><span class="status publicado">Publicado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -729,7 +738,7 @@
           <div class="post-body">
             <div class="post-date">22/07 · E-mail</div>
             <div class="post-title">Email — Vendas Pais (Treino) Noga | Voet | Walka — 20%</div>
-            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="tag produto">Noga</span><span class="tag produto">Voet</span><span class="tag produto">Walka</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="tag produto">Noga</span><span class="tag produto">Voet</span><span class="tag produto">Walka</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -741,7 +750,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">Oi, {{client_first_name}}! 👣<br>Pra o pai que não abre mão do movimento, o Noga é o presente certo. 🏃<br><br>4 cores disponíveis com desconto especial de Dia dos Pais. Leveza, conforto e a base natural que ele vai sentir em cada passo.<br><br>Clique abaixo e escolha a cor favorita dele.<br>Grounded together</div>
             </details>
-            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -761,7 +770,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">FOT: Voce tem {{giftback_value}} de cashback para resgatar! Aproveite para garantir seu presente de Dia dos Pais com ate 20% OFF: [LINK]</div>
             </details>
-            <div class="post-tags"><span class="tag laranja">SMS</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag laranja">SMS</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -773,7 +782,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">FOT: Dia dos Pais com ate 20% OFF em modelos selecionados. Garanta o presente perfeito: [LINK]</div>
             </details>
-            <div class="post-tags"><span class="tag laranja">SMS</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag laranja">SMS</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -818,7 +827,7 @@
           <div class="post-body">
             <div class="post-date">27/07 · E-mail</div>
             <div class="post-title">Email — Vendas Pais (Herança) Walka | Lito | Rudo — 20%</div>
-            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="tag produto">Walka</span><span class="tag produto">Lito</span><span class="tag produto">Rudo</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="tag produto">Walka</span><span class="tag produto">Lito</span><span class="tag produto">Rudo</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -845,7 +854,7 @@
           <div class="post-body">
             <div class="post-date">28/07 · WhatsApp</div>
             <div class="post-title">Wtpp | Reforço pais - Promo 2 tênis</div>
-            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -853,7 +862,7 @@
           <div class="post-body">
             <div class="post-date">29/07 · E-mail</div>
             <div class="post-title">Email Branding — Construindo Memórias — Pais</div>
-            <div class="post-tags"><span class="tag azul">E-mail</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -888,7 +897,7 @@
           <div class="post-body">
             <div class="post-date">31/07 · WhatsApp</div>
             <div class="post-title">Wtpp | Pais - Entrega garantida</div>
-            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -908,7 +917,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">Presentear quem sempre foi a sua base exige algo que fuja do óbvio.<br><br>O Dia dos Pais está chegando e essa é a chance de retribuir todo o cuidado com mais conforto, espaço para os dedos e a liberdade do movimento natural.<br><br>Mas atenção ao relógio: hoje é o último dia com entrega garantida para a região Sudeste.<br><br>Diversos modelos com até 20% OFF no site. Escolha o presente ideal antes que o tempo acabe.<br><br>Grounded together<br><br>#FeetOfTomorrow #MovimentoBarefoot #DiadosPais</div>
             </details>
-            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="status enviado">Enviado</span></div>
+            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag campanha">Dia dos Pais</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
       </div>
@@ -980,7 +989,7 @@
     var tagEl = card.querySelector('.post-tags .tag');
     if (!tagEl) return null;
     if (tagEl.classList.contains('azul')) return 'email';
-    if (tagEl.classList.contains('neon')) return 'whatsapp';
+    if (tagEl.classList.contains('neon') || tagEl.classList.contains('outline-neon')) return 'whatsapp';
     if (tagEl.classList.contains('laranja')) return 'sms';
     if (tagEl.classList.contains('outline')) return 'collab';
     if (tagEl.classList.contains('chumbo')) {
@@ -1060,6 +1069,7 @@
 
   renderGroupedSummary('territorio', 'territoryList', 'Nenhum post com território definido ainda.');
   renderGroupedSummary('produto', 'productList', 'Nenhum post com produto definido ainda.');
+  renderGroupedSummary('campanha', 'campaignList', 'Nenhum post com campanha definida ainda.');
 </script>
 </body>
 </html>

@@ -175,6 +175,7 @@
   .tag.chumbo{ background:var(--chumbo); color:var(--off-white); }
   .tag.territorio{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
   .tag.produto{ background:transparent; color:var(--muted); border:1px dotted var(--line); }
+  .tag.campanha{ background:transparent; color:var(--muted); border:2px double var(--line); }
   .status{ font-size:9.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
   .status.publicado{ background:var(--neon); color:var(--chumbo); }
   .status.producao{ background:transparent; color:var(--muted); border:1px solid var(--line); }
@@ -274,6 +275,14 @@
     <div class="kicker">Resumo mensal · gestão de marca</div>
     <h1>Ações de<br><span class="accent">Agosto</span></h1>
   </div>
+
+  <!-- CAMPANHAS -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">✦</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Campanhas</span><span class="week-range-inline">Ações agrupadas por campanha.</span></span></summary>
+    <div class="section-inner">
+    <div class="territory-list" id="campaignList"></div>
+    </div>
+  </details>
 
   <!-- MINI CALENDÁRIO -->
   <details class="mini-cal week-toggle" open>
@@ -650,7 +659,7 @@
     var tagEl = card.querySelector('.post-tags .tag');
     if (!tagEl) return null;
     if (tagEl.classList.contains('azul')) return 'email';
-    if (tagEl.classList.contains('neon')) return 'whatsapp';
+    if (tagEl.classList.contains('neon') || tagEl.classList.contains('outline-neon')) return 'whatsapp';
     if (tagEl.classList.contains('laranja')) return 'sms';
     if (tagEl.classList.contains('outline')) return 'collab';
     if (tagEl.classList.contains('chumbo')) {
@@ -730,6 +739,7 @@
 
   renderGroupedSummary('territorio', 'territoryList', 'Nenhum post com território definido ainda.');
   renderGroupedSummary('produto', 'productList', 'Nenhum post com produto definido ainda.');
+  renderGroupedSummary('campanha', 'campaignList', 'Nenhum post com campanha definida ainda.');
 </script>
 </body>
 </html>

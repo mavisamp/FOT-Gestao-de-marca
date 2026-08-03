@@ -1033,7 +1033,8 @@
     var tagEl = card.querySelector('.post-tags .tag');
     if (!tagEl) return null;
     if (tagEl.classList.contains('azul')) return 'email';
-    if (tagEl.classList.contains('neon') || tagEl.classList.contains('outline-neon')) return 'whatsapp';
+    if (tagEl.classList.contains('outline-neon')) return 'vip';
+    if (tagEl.classList.contains('neon')) return 'whatsapp';
     if (tagEl.classList.contains('laranja')) return 'sms';
     if (tagEl.classList.contains('outline')) return 'collab';
     if (tagEl.classList.contains('chumbo')) {
@@ -1048,11 +1049,12 @@
     collab: ['collab', 'collabs'],
     email: ['email', 'emails'],
     whatsapp: ['whatsapp', 'whatsapps'],
+    vip: ['grupo VIP', 'grupos VIP'],
     sms: ['SMS', 'SMS'],
     post: ['post', 'posts'],
     story: ['story', 'stories']
   };
-  var CHANNEL_ORDER = ['email', 'whatsapp', 'post', 'collab', 'sms', 'story'];
+  var CHANNEL_ORDER = ['email', 'whatsapp', 'vip', 'post', 'collab', 'sms', 'story'];
 
   function renderGroupedSummary(tagClass, containerId, emptyText) {
     var container = document.getElementById(containerId);

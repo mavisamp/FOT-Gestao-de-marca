@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feet Of Tomorrow — Ações de Setembro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --off-white: #E6E6DC;
+    --chumbo:    #3C3C3B;
+    --azul:      #556EE6;
+    --laranja:   #FF9132;
+    --neon:      #DCF573;
+    --line: rgba(60,60,59,0.16);
+    --muted: rgba(60,60,59,0.6);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--off-white);
+    color:var(--chumbo);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wordmark, .eyebrow, h1, h2, .label, .marker{ font-family:'Space Grotesk', sans-serif; }
+
+  .page{ max-width:960px; margin:0 auto; padding:40px 32px 60px; position:relative; }
+
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;
+    font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--chumbo);
+    padding-bottom:14px; border-bottom:1px solid var(--line); font-weight:600;
+  }
+  .topbar span{ opacity:.8; }
+  .topbar .active{ border-bottom:1.5px solid var(--chumbo); padding-bottom:2px; opacity:1; }
+
+  .title-block{ padding:56px 0 40px; }
+  .kicker{ font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--azul); margin-bottom:10px; }
+  h1{ font-size:clamp(38px, 6vw, 58px); font-weight:700; line-height:1; text-transform:uppercase; margin:0; letter-spacing:.01em; }
+  h1 .accent{ color:var(--azul); }
+  .title-sub{ margin-top:16px; font-size:15px; color:var(--muted); max-width:480px; line-height:1.5; }
+
+  /* ---------- MINI CALENDÁRIO (visão rápida do mês) ---------- */
+  .mini-cal-legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:11px; color:var(--muted); margin-bottom:16px; }
+  .mini-cal-legend .key{ display:flex; align-items:center; gap:5px; }
+  .mini-cal-legend .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7, 1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .cal-weekday{ font-family:'Space Grotesk', sans-serif; font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); text-align:center; padding:8px 4px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:rgba(60,60,59,0.03); }
+  .cal-cell{ min-height:62px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:6px 6px 8px; display:flex; flex-direction:column; gap:6px; }
+  .cal-cell.is-blank{ background:rgba(60,60,59,0.025); }
+  .cal-daynum{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:600; color:var(--muted); }
+  .cal-dots{ display:flex; flex-direction:column; gap:2px; }
+  .cal-tag{ font-size:8px; font-weight:700; line-height:1.15; letter-spacing:.01em; }
+  .cal-tag.chumbo{ color:var(--chumbo); }
+  .cal-tag.story{ color:var(--muted); font-weight:600; }
+  .cal-tag.outline{ color:var(--chumbo); font-style:italic; font-weight:600; }
+  .cal-tag.azul{ color:var(--azul); }
+  .cal-tag.neon{ color:#8A9E2E; }
+  .cal-tag.laranja{ color:var(--laranja); }
+  .cal-tag.outline-neon{ color:#8A9E2E; font-style:italic; }
+  @media (max-width:640px){
+    .cal-cell{ min-height:40px; padding:4px; }
+    .cal-weekday{ font-size:8px; padding:4px 2px; }
+  }
+
+  .standby-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .standby-list li{ font-size:13px; line-height:1.5; color:var(--chumbo); padding-bottom:10px; border-bottom:1px solid var(--line); }
+  .standby-list li:last-child{ border-bottom:none; padding-bottom:0; }
+  .standby-list li strong{ font-family:'Space Grotesk', sans-serif; }
+  .standby-list li .standby-note{ color:var(--muted); font-style:italic; }
+
+  /* ---------- PILARES DA CAMPANHA (colunas manuais) ---------- */
+  .pillar-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px; }
+  .pillar-card{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 14px; display:flex; flex-direction:column; gap:8px; }
+  .pillar-card.pillar-card-empty{ background:transparent; border-style:dashed; }
+  .pillar-num{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:700; color:var(--muted); }
+  .pillar-name{ font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:700; text-transform:uppercase; }
+  .pillar-name.placeholder{ color:var(--muted); font-style:italic; text-transform:none; font-weight:600; }
+  .pillar-desc{ font-size:12.5px; line-height:1.5; color:var(--chumbo); }
+  .pillar-desc.placeholder{ color:var(--muted); font-style:italic; }
+
+  .section{ display:grid; grid-template-columns:220px 1fr; gap:32px; padding:34px 0; border-top:1px solid var(--line); }
+
+  details.week-toggle{ padding:20px 0; border-top:1px solid var(--line); }
+  details.week-toggle summary{
+    list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px;
+    padding:2px 0; align-self:start;
+  }
+  details.week-toggle summary::-webkit-details-marker{ display:none; }
+  .week-marker-group{
+    display:flex; align-items:center; gap:8px; flex:none;
+  }
+  .week-marker-group .marker{ font-size:22px; line-height:1; }
+  .week-arrow{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px; height:20px; border-radius:50%; border:1.5px solid var(--chumbo);
+    font-size:10px; color:var(--chumbo); transition:transform .2s ease;
+    flex:none;
+  }
+  details.week-toggle[open] .week-arrow{ transform:rotate(180deg); }
+  .week-text-group{ display:flex; flex-direction:column; gap:2px; }
+  details.week-toggle .week-range-inline{ font-size:12px; color:var(--muted); }
+  details.week-toggle .section-inner{ margin-top:20px; }
+  .section .label-col{ padding-top:2px; }
+  .eyebrow{
+    font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.02em;
+    border-bottom:1.5px solid var(--chumbo); display:inline-block; padding-bottom:4px; margin:0 0 10px;
+  }
+  .label-desc{ font-size:13px; color:var(--muted); line-height:1.5; max-width:200px; }
+
+  .tp-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; }
+  .tp-card{ border-radius:10px; padding:16px 14px; display:flex; flex-direction:column; gap:14px; min-height:90px; justify-content:space-between; overflow:hidden; }
+  .tp-card .ic{ width:26px;height:26px; flex:none; }
+  .tp-card .ic svg{ width:100%; height:100%; }
+  .tp-card .name{ font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:14.5px; }
+  .tp-bottom{ display:flex; align-items:flex-end; justify-content:space-between; gap:8px; }
+  .tp-bottom .name{ flex:1 1 auto; min-width:0; }
+  .tp-card .count{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; line-height:1; opacity:.9; flex:none; white-space:nowrap; }
+  .tp-azul{ background:var(--azul); color:#fff; }
+  .tp-neon{ background:var(--neon); color:var(--chumbo); }
+  .tp-laranja{ background:var(--laranja); color:#fff; }
+  .tp-chumbo{ background:var(--chumbo); color:var(--off-white); }
+  .tp-outline{ background:transparent; color:var(--chumbo); border:1.5px solid var(--chumbo); }
+  .tp-outline-azul{ background:transparent; color:var(--azul); border:1.5px solid var(--azul); }
+  .tp-outline-neon{ background:#E3E3D9; color:var(--chumbo); border:2px solid var(--neon); }
+  .tag.outline-neon{ background:transparent; color:var(--chumbo); border:1px solid var(--neon); }
+  .thumb.vip-thumb{ display:flex; align-items:center; justify-content:center; background:transparent; border:1.5px dashed var(--neon); aspect-ratio:3/4; color:var(--chumbo); }
+  .thumb.vip-thumb svg{ width:32px; height:32px; }
+
+  .week-head{ display:flex; align-items:baseline; gap:10px; margin-bottom:4px; }
+  .marker{ font-size:20px; line-height:1; }
+  .week-title{ font-weight:600; font-size:15px; text-transform:uppercase; letter-spacing:.02em; }
+  .week-range{ font-size:12px; color:var(--muted); }
+
+  /* ---------- POST CARDS (fotos + legenda) ---------- */
+  .post-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+    gap:14px;
+    margin-top:18px;
+  }
+  .post-card{
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+  }
+  .post-card .thumb{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    display:block;
+    background:var(--line);
+  }
+  .post-card .thumb.empty{
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted); font-size:11px; text-align:center; padding:10px;
+  }
+  .thumb.email-thumb{
+    display:flex; align-items:center; justify-content:flex-start; gap:8px;
+    background:var(--azul); aspect-ratio:auto; height:44px; color:#fff; padding:0 12px;
+  }
+  .thumb.email-thumb svg{ width:18px; height:18px; color:#fff; flex:none; }
+  .thumb.email-thumb::after{ content:"E-MAIL"; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase; }
+  .thumb.whatsapp-thumb{ display:flex; align-items:center; justify-content:center; background:var(--neon); aspect-ratio:3/4; color:var(--chumbo); }
+  .thumb.whatsapp-thumb svg{ width:34px; height:34px; }
+  .thumb.sms-thumb{ display:flex; align-items:center; justify-content:flex-start; gap:8px; background:var(--laranja); aspect-ratio:auto; height:44px; color:#fff; padding:0 12px; }
+  .thumb.sms-thumb svg{ width:18px; height:18px; flex:none; }
+  .thumb.sms-thumb::after{ content:"SMS"; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase; }
+  .status.standby{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
+  .thumb.influencer-thumb{ display:flex; align-items:center; justify-content:center; background:transparent; border:1.5px dashed var(--chumbo); aspect-ratio:3/4; color:var(--chumbo); }
+  .thumb.influencer-thumb svg{ width:32px; height:32px; }
+    .thumb.thumb-square{ aspect-ratio:1/1; object-fit:cover; }
+  .wtpp-btn{
+    display:inline-block; margin-top:6px; padding:4px 10px; border-radius:999px;
+    background:var(--chumbo); color:var(--off-white); font-family:'Space Grotesk', sans-serif;
+    font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  }
+
+  .post-body{ padding:10px 12px 12px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .post-date{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:600; color:var(--muted); }
+  .post-title{ font-family:'Space Grotesk', sans-serif; font-size:13.5px; font-weight:700; color:var(--chumbo); line-height:1.3; }
+  .post-title.placeholder{ color:var(--muted); font-style:italic; font-weight:600; }
+  .post-caption{ font-size:12.5px; line-height:1.4; color:var(--chumbo); }
+  .post-caption.placeholder{ color:var(--muted); font-style:italic; }
+  .post-tags{ display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; padding-top:4px; }
+
+  .tag{
+    font-family:'Space Grotesk', sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.02em;
+    text-transform:uppercase; padding:3px 8px; border-radius:999px; white-space:nowrap;
+  }
+  .tag.chumbo{ background:var(--chumbo); color:var(--off-white); }
+  .tag.territorio{ background:transparent; color:var(--muted); border:1px dashed var(--line); }
+  .tag.produto{ background:transparent; color:var(--muted); border:1px dotted var(--line); }
+  .tag.campanha{ background:transparent; color:var(--muted); border:2px double var(--line); }
+  .status{ font-size:9.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
+  .status.publicado{ background:var(--neon); color:var(--chumbo); }
+  .status.producao{ background:transparent; color:var(--muted); border:1px solid var(--line); }
+  .status.enviado{ background:var(--neon); color:var(--chumbo); }
+  .status.agendado{ background:transparent; color:var(--azul); border:1px solid var(--azul); }
+
+  /* ---------- TERRITÓRIOS DO MÊS (agrupamento automático por tema/território) ---------- */
+  .territory-group{ margin-bottom:18px; }
+  .territory-group:last-child{ margin-bottom:0; }
+  .territory-group-head{ display:flex; align-items:baseline; gap:8px; margin-bottom:8px; }
+  .territory-group-name{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:.02em; }
+  .territory-group-count{ font-size:12px; color:var(--muted); }
+  .territory-empty{ font-size:13px; color:var(--muted); font-style:italic; }
+
+  /* other-channel simple list (email/whatsapp/sms/influ/trafego placeholders) */
+  .action-list{ list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .action{ display:flex; align-items:flex-start; gap:10px; font-size:14px; line-height:1.5; flex-wrap:wrap; }
+  .action .arrow{ flex:none; font-weight:600; color:var(--chumbo); opacity:.5; font-size:13px; margin-top:2px; }
+  .action .tag.azul{ background:var(--azul); color:#fff; }
+  .action .tag.neon{ background:var(--neon); color:var(--chumbo); }
+  .action .tag.laranja{ background:var(--laranja); color:#fff; }
+  .action .tag.outline{ background:transparent; color:var(--chumbo); border:1px solid var(--chumbo); }
+  .action .tag.outline-azul{ background:transparent; color:var(--azul); border:1px solid var(--azul); }
+  .action .txt{ flex:1 1 200px; min-width:150px; }
+  .action .txt.placeholder{ color:var(--muted); font-style:italic; }
+
+  .feed-section{ border-top:1px solid var(--line); }
+  .feed-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:3px;
+  }
+  .feed-cell{ aspect-ratio:3/4; overflow:hidden; background:var(--line); }
+  .feed-cell img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .feed-cell-empty{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+    background:var(--bg-card, #fff); border:1px dashed var(--line); color:var(--muted);
+    font-family:'Space Grotesk', sans-serif; text-align:center; padding:8px;
+  }
+  .feed-cell-empty span{ font-size:11px; }
+  .feed-cell-empty .feed-empty-label{ font-size:10px; font-style:italic; }
+
+  .footer{
+    margin-top:50px; padding-top:20px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); font-weight:600;
+  }
+
+
+  .caption-toggle{ margin-top:2px; }
+  .caption-toggle summary{
+    list-style:none; cursor:pointer; font-family:'Space Grotesk', sans-serif;
+    font-size:11px; font-weight:600; color:var(--azul); user-select:none;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  .caption-toggle summary::-webkit-details-marker{ display:none; }
+  .caption-toggle .cap-hide{ display:none; }
+  .caption-toggle[open] .cap-show{ display:none; }
+  .caption-toggle[open] .cap-hide{ display:inline; }
+  .caption-toggle .cap-arrow{
+    display:inline-block; font-size:9px; transition:transform .2s ease;
+  }
+  .caption-toggle[open] .cap-arrow{ transform:rotate(180deg); }
+  .caption-toggle .post-caption{ margin-top:8px; }
+
+  @media (max-width:640px){
+    .section{ grid-template-columns:1fr; gap:10px; }
+    .post-grid{ grid-template-columns:1fr; gap:10px; }
+    .pillar-grid{ grid-template-columns:1fr 1fr; }
+  }
+
+  /* Mantém o título da semana ("SEMANA X" + intervalo de datas) fixo no topo
+     enquanto a seção está aberta e o usuário rola o conteúdo — principalmente no desktop,
+     onde o cabeçalho fica numa coluna separada do conteúdo. */
+  @media (min-width:641px){
+    details.week-toggle[open] summary.week-summary{
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: var(--off-white);
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+  @media print{ body{ background:#fff; } }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+    <span class="wordmark">FEET OF TOMORROW</span>
+    <span>RELATÓRIO DE MARCA</span>
+    <span class="active">AÇÕES · SETEMBRO</span>
+    <span>2026</span>
+  </div>
+
+  <div class="title-block">
+    <div class="kicker">Resumo mensal · gestão de marca</div>
+    <h1>Ações de<br><span class="accent">Setembro</span></h1>
+    <div class="title-sub">Mês de aniversário — a FOT completa 5 anos, com o dia oficial em 29/09.</div>
+  </div>
+
+  <!-- CAMPANHA: ANIVERSÁRIO FOT — 5 ANOS -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">✦</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Campanhas</span><span class="week-range-inline">Aniversário FOT — 5 anos · dia oficial 29/09.</span></span></summary>
+    <div class="section-inner">
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="pillar-num">1</div>
+        <div class="pillar-name">Influencers</div>
+        <div class="pillar-desc">10 selecionados — 5 de venda (Zeka, Rickson, Camila Wipel, Marina Ferrari, Ortiz) e 5 de conteúdo/UGC (Cadu confirmado, 4 a definir).</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">2</div>
+        <div class="pillar-name">Descontos</div>
+        <div class="pillar-desc placeholder">Mês promocional, com promoção variando por semana. Detalhamento em definição.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-num">3</div>
+        <div class="pillar-name">CRM</div>
+        <div class="pillar-desc placeholder">A definir.</div>
+      </div>
+      <div class="pillar-card pillar-card-empty">
+        <div class="pillar-num">4</div>
+        <div class="pillar-name placeholder">A definir</div>
+      </div>
+    </div>
+    </div>
+  </details>
+
+  <!-- MINI CALENDÁRIO -->
+  <details class="mini-cal week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">▦</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Calendário do mês</span></span></summary>
+    <div class="section-inner">
+    <div class="mini-cal-legend">
+      <span class="key"><span class="dot" style="background:var(--azul)"></span>E-mail</span>
+      <span class="key"><span class="dot" style="background:var(--neon)"></span>WhatsApp</span>
+      <span class="key"><span class="dot" style="background:var(--laranja)"></span>SMS</span>
+      <span class="key"><span class="dot" style="background:var(--chumbo)"></span>Post</span>
+      <span class="key"><span class="dot" style="background:var(--muted)"></span>Story</span>
+      <span class="key"><span class="dot" style="background:transparent;border:1.5px solid var(--chumbo)"></span>Collab</span>
+    </div>
+    <div class="cal-grid" id="monthCalendar" data-month="09">
+      <div class="cal-weekday">Seg</div>
+      <div class="cal-weekday">Ter</div>
+      <div class="cal-weekday">Qua</div>
+      <div class="cal-weekday">Qui</div>
+      <div class="cal-weekday">Sex</div>
+      <div class="cal-weekday">Sáb</div>
+      <div class="cal-weekday">Dom</div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell" data-day="01"><span class="cal-daynum">01</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="02"><span class="cal-daynum">02</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="03"><span class="cal-daynum">03</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="04"><span class="cal-daynum">04</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="05"><span class="cal-daynum">05</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="06"><span class="cal-daynum">06</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="07"><span class="cal-daynum">07</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="08"><span class="cal-daynum">08</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="09"><span class="cal-daynum">09</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="10"><span class="cal-daynum">10</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="11"><span class="cal-daynum">11</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="12"><span class="cal-daynum">12</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="13"><span class="cal-daynum">13</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="14"><span class="cal-daynum">14</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="15"><span class="cal-daynum">15</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="16"><span class="cal-daynum">16</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="17"><span class="cal-daynum">17</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="18"><span class="cal-daynum">18</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="19"><span class="cal-daynum">19</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="20"><span class="cal-daynum">20</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="21"><span class="cal-daynum">21</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="22"><span class="cal-daynum">22</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="23"><span class="cal-daynum">23</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="24"><span class="cal-daynum">24</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="25"><span class="cal-daynum">25</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="26"><span class="cal-daynum">26</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="27"><span class="cal-daynum">27</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="28"><span class="cal-daynum">28</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="29"><span class="cal-daynum">29</span><span class="cal-dots"></span></div>
+      <div class="cal-cell" data-day="30"><span class="cal-daynum">30</span><span class="cal-dots"></span></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+      <div class="cal-cell is-blank"></div>
+    </div>
+    </div>
+  </details>
+
+  <!-- TERRITÓRIOS DO MÊS -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">◆</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Territórios do mês</span><span class="week-range-inline">Temas trabalhados, agrupados por território.</span></span></summary>
+    <div class="section-inner">
+    <div class="territory-list" id="territoryList"></div>
+    </div>
+  </details>
+
+  <!-- PRODUTOS DO MÊS -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">◇</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Produtos do mês</span><span class="week-range-inline">Modelos citados, agrupados por produto.</span></span></summary>
+    <div class="section-inner">
+    <div class="territory-list" id="productList"></div>
+    </div>
+  </details>
+
+  <!-- PONTOS DE CONTATO -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">◎</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Pontos de contato</span><span class="week-range-inline">Canais utilizados nas ações de comunicação da marca ao longo do mês.</span></span></summary>
+    <div class="section-inner">
+    <div class="tp-grid">
+      <div class="tp-card tp-azul" data-count-tag="azul" data-count-text="E-mail">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg></span>
+        <div class="tp-bottom"><span class="name">E-mail</span><span class="count">0</span></div>
+      </div>
+      <div class="tp-card tp-neon" data-count-tag="neon" data-count-text="WhatsApp">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4A8.5 8.5 0 0 1 4 12a8.4 8.4 0 0 1 14.6-5.7A8.3 8.3 0 0 1 21 11.5z"/><path d="M8 12l2 2 4-4"/></svg></span>
+        <div class="tp-bottom"><span class="name">WhatsApp</span><span class="count">0</span></div>
+      </div>
+      <div class="tp-card tp-laranja" data-count-tag="laranja" data-count-text="SMS">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M10 18h4"/></svg></span>
+        <div class="tp-bottom"><span class="name">SMS</span><span class="count">0</span></div>
+      </div>
+      <div class="tp-card tp-chumbo" data-count-tag="chumbo" data-count-text="Post Orgânico">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+        <div class="tp-bottom"><span class="name">Posts</span><span class="count">0</span></div>
+      </div>
+      <div class="tp-card tp-chumbo" data-count-tag="chumbo" data-count-text="Story Orgânico">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></span>
+        <div class="tp-bottom"><span class="name">Stories</span><span class="count">0</span></div>
+      </div>
+      <div class="tp-card tp-outline" data-count-tag="outline" data-count-text="Collab">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <div class="tp-bottom"><span class="name">Collabs</span><span class="count">0</span></div>
+      </div>
+      <div class="tp-card tp-outline-neon" data-count-tag="outline-neon" data-count-text="Grupo VIP">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4A8.5 8.5 0 0 1 4 12a8.4 8.4 0 0 1 14.6-5.7A8.3 8.3 0 0 1 21 11.5z"/><path d="M8 12l2 2 4-4"/></svg></span>
+        <div class="tp-bottom"><span class="name">Grupo VIP WhatsApp</span><span class="count">0</span></div>
+      </div>
+    </div>
+    </div>
+  </details>
+
+  <div class="footer">
+    <span class="wordmark">FEET OF TOMORROW · RELATÓRIO INTERNO</span>
+    <span>Desenvolvido por Maria Vitória S.C</span>
+  </div>
+
+</div>
+<script>
+  document.querySelectorAll('.tp-card[data-count-tag]').forEach(function(card){
+    var cls = card.getAttribute('data-count-tag');
+    var text = card.getAttribute('data-count-text');
+    var els = document.querySelectorAll('.post-grid .tag.' + cls);
+
+    var count = 0;
+    els.forEach(function(el){
+      if (el.textContent.trim() === text) count++;
+    });
+    var countEl = card.querySelector('.count');
+    if (countEl) countEl.textContent = count;
+  });
+
+  // Mini calendário: lê os cards de post-grid já existentes na página e
+  // escreve o tipo de conteúdo (uma palavra por linha) no dia correspondente, colorido pelo canal.
+  var monthCal = document.getElementById('monthCalendar');
+  if (monthCal) {
+    var calMonth = monthCal.getAttribute('data-month');
+    document.querySelectorAll('.post-grid .post-card').forEach(function(card){
+      var dateEl = card.querySelector('.post-date');
+      if (!dateEl) return;
+      var m = dateEl.textContent.match(/^(\d{2})\/(\d{2})/);
+      if (!m || m[2] !== calMonth) return;
+      var cell = monthCal.querySelector('.cal-cell[data-day="' + m[1] + '"]');
+      if (!cell) return;
+      var dotsWrap = cell.querySelector('.cal-dots');
+      var tagEl = card.querySelector('.post-tags .tag');
+      if (!dotsWrap || !tagEl) return;
+      var colorCls = ['azul','neon','laranja','chumbo','outline','outline-neon'].find(function(c){
+        return tagEl.classList.contains(c);
+      });
+      if (!colorCls) return;
+      if (colorCls === 'chumbo' && dateEl.textContent.indexOf('Story') !== -1) colorCls = 'story';
+      var textLabels = { chumbo:'post', story:'story', outline:'collab', azul:'email', neon:'wtpp', laranja:'sms', 'outline-neon':'vip' };
+      var tagSpan = document.createElement('span');
+      tagSpan.className = 'cal-tag ' + colorCls;
+      tagSpan.textContent = textLabels[colorCls] || colorCls;
+      dotsWrap.appendChild(tagSpan);
+    });
+  }
+
+  // Territórios/Produtos do mês: agrupa cards que tiverem uma tag
+  // ".tag.territorio" ou ".tag.produto" pelo texto dela, mostrando
+  // quantos de cada canal (collab/email/whatsapp/sms/post/story) caem
+  // em cada grupo, além da lista de títulos.
+  function detectChannel(card) {
+    var tagEl = card.querySelector('.post-tags .tag');
+    if (!tagEl) return null;
+    if (tagEl.classList.contains('azul')) return 'email';
+    if (tagEl.classList.contains('outline-neon')) return 'vip';
+    if (tagEl.classList.contains('neon')) return 'whatsapp';
+    if (tagEl.classList.contains('laranja')) return 'sms';
+    if (tagEl.classList.contains('outline')) return 'collab';
+    if (tagEl.classList.contains('chumbo')) {
+      var dateEl = card.querySelector('.post-date');
+      var isStory = dateEl && dateEl.textContent.indexOf('Story') !== -1;
+      return isStory ? 'story' : 'post';
+    }
+    return null;
+  }
+
+  var CHANNEL_LABELS = {
+    collab: ['collab', 'collabs'],
+    email: ['email', 'emails'],
+    whatsapp: ['whatsapp', 'whatsapps'],
+    vip: ['grupo VIP', 'grupos VIP'],
+    sms: ['SMS', 'SMS'],
+    post: ['post', 'posts'],
+    story: ['story', 'stories']
+  };
+  var CHANNEL_ORDER = ['email', 'whatsapp', 'vip', 'post', 'collab', 'sms', 'story'];
+
+  function renderGroupedSummary(tagClass, containerId, emptyText) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    var groups = {};
+    document.querySelectorAll('.post-grid .post-card').forEach(function(card){
+      var tagEls = card.querySelectorAll('.tag.' + tagClass);
+      if (!tagEls.length) return;
+      var titleEl = card.querySelector('.post-title');
+      var title = titleEl ? titleEl.textContent.trim() : '(sem título)';
+      var channel = detectChannel(card);
+      tagEls.forEach(function(tagEl){
+        var name = tagEl.textContent.trim();
+        if (!name) return;
+        if (!groups[name]) groups[name] = { items: [], byChannel: {} };
+        groups[name].items.push(title);
+        if (channel) groups[name].byChannel[channel] = (groups[name].byChannel[channel] || 0) + 1;
+      });
+    });
+    var names = Object.keys(groups).sort(function(a, b){
+      return groups[b].items.length - groups[a].items.length || a.localeCompare(b);
+    });
+    if (names.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'territory-empty';
+      empty.textContent = emptyText;
+      container.appendChild(empty);
+      return;
+    }
+    names.forEach(function(name){
+      var data = groups[name];
+      var group = document.createElement('div');
+      group.className = 'territory-group';
+
+      var head = document.createElement('div');
+      head.className = 'territory-group-head';
+      var nameEl = document.createElement('span');
+      nameEl.className = 'territory-group-name';
+      nameEl.textContent = name;
+      var breakdown = CHANNEL_ORDER
+        .filter(function(c){ return data.byChannel[c]; })
+        .map(function(c){
+          var n = data.byChannel[c];
+          var pair = CHANNEL_LABELS[c];
+          return n + ' ' + (n === 1 ? pair[0] : pair[1]);
+        })
+        .join(' | ');
+      var countEl = document.createElement('span');
+      countEl.className = 'territory-group-count';
+      countEl.textContent = breakdown || ('(' + data.items.length + ')');
+      head.appendChild(nameEl);
+      head.appendChild(countEl);
+
+      group.appendChild(head);
+      container.appendChild(group);
+    });
+  }
+
+  renderGroupedSummary('territorio', 'territoryList', 'Nenhum post com território definido ainda.');
+  renderGroupedSummary('produto', 'productList', 'Nenhum post com produto definido ainda.');
+  renderGroupedSummary('campanha', 'campaignList', 'Nenhum post com campanha definida ainda.');
+</script>
+</body>
+</html>

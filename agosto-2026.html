@@ -51,22 +51,25 @@
   .cal-cell{ min-height:62px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:6px 6px 8px; display:flex; flex-direction:column; gap:6px; }
   .cal-cell.is-blank{ background:rgba(60,60,59,0.025); }
   .cal-daynum{ font-family:'Space Grotesk', sans-serif; font-size:11px; font-weight:600; color:var(--muted); }
-  .cal-dots{ display:flex; flex-wrap:wrap; gap:3px; }
-  .cal-dot{ width:7px; height:7px; border-radius:50%; flex:none; }
-  .cal-dot.azul{ background:var(--azul); }
-  .cal-dot.neon{ background:var(--neon); }
-  .cal-dot.laranja{ background:var(--laranja); }
-  .cal-dot.chumbo{ background:var(--chumbo); }
-  .cal-dot.outline{ background:transparent; border:1.5px solid var(--chumbo); }
-  .cal-dot.story{ background:var(--muted); }
-  .cal-tag{ font-size:8px; font-weight:700; line-height:1.1; letter-spacing:.01em; }
-  .cal-tag.post{ color:var(--chumbo); }
+  .cal-dots{ display:flex; flex-direction:column; gap:2px; }
+  .cal-tag{ font-size:8px; font-weight:700; line-height:1.15; letter-spacing:.01em; }
+  .cal-tag.chumbo{ color:var(--chumbo); }
   .cal-tag.story{ color:var(--muted); font-weight:600; }
-  .cal-tag.collab{ color:var(--chumbo); font-style:italic; font-weight:600; }
+  .cal-tag.outline{ color:var(--chumbo); font-style:italic; font-weight:600; }
+  .cal-tag.azul{ color:var(--azul); }
+  .cal-tag.neon{ color:#8A9E2E; }
+  .cal-tag.laranja{ color:var(--laranja); }
+  .cal-tag.outline-neon{ color:#8A9E2E; font-style:italic; }
   @media (max-width:640px){
     .cal-cell{ min-height:40px; padding:4px; }
     .cal-weekday{ font-size:8px; padding:4px 2px; }
   }
+
+  .standby-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .standby-list li{ font-size:13px; line-height:1.5; color:var(--chumbo); padding-bottom:10px; border-bottom:1px solid var(--line); }
+  .standby-list li:last-child{ border-bottom:none; padding-bottom:0; }
+  .standby-list li strong{ font-family:'Space Grotesk', sans-serif; }
+  .standby-list li .standby-note{ color:var(--muted); font-style:italic; }
 
   .section{ display:grid; grid-template-columns:220px 1fr; gap:32px; padding:34px 0; border-top:1px solid var(--line); }
 
@@ -374,6 +377,18 @@
     </div>
   </details>
 
+  <!-- IDEIAS EM STAND BY -->
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">⏸</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Ideias em stand by</span><span class="week-range-inline">Conteúdos com ideia definida, mas sem data ainda.</span></span></summary>
+    <div class="section-inner">
+    <ul class="standby-list">
+      <li><strong>Vídeo/Story · Urban Coffee</strong> — menina usando Urban Coffee. <span class="standby-note">Sem data definida (saiu da grade em 04/08).</span></li>
+      <li><strong>Sequência de stories · Meia com dedão separado</strong> — 2 a 3 telas, copy curta sobre o diferencial da meia. <span class="standby-note">Em espera desde a semana 1, talvez semana 3.</span></li>
+      <li><strong>WhatsApp · "Último dia com os preços"</strong> — mensagem de urgência pro Bruk. <span class="standby-note">Não segue por enquanto, mas no radar.</span></li>
+    </ul>
+    </div>
+  </details>
+
   <!-- PONTOS DE CONTATO -->
   <details class="section week-toggle" open>
     <summary class="week-summary"><span class="week-marker-group"><span class="marker">◎</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Pontos de contato</span><span class="week-range-inline">Canais utilizados nas ações de comunicação da marca ao longo do mês.</span></span></summary>
@@ -444,7 +459,7 @@
             <div class="post-title">Persistência</div>
             <details class="caption-toggle">
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
-              <div class="post-caption">Cada passo que parece pequeno ainda é passo.<br><br>Perseverar não é sobre nunca parar — é sobre continuar voltando ao caminho, do seu jeito, no seu tempo.<br><br>Go further</div>
+              <div class="post-caption">Cada passo que parece pequeno ainda é passo.<br><br>Perseverar é continuar voltando ao caminho, do seu jeito, no seu tempo, sem pressa de chegar.<br><br>Go further</div>
             </details>
             <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag territorio">Movimento</span><span class="status producao">Em produção</span></div>
           </div>
@@ -768,7 +783,7 @@
   });
 
   // Mini calendário: lê os cards de post-grid já existentes na página e
-  // desenha uma bolinha por card no dia correspondente, colorida pelo canal.
+  // escreve o tipo de conteúdo (uma palavra por linha) no dia correspondente, colorido pelo canal.
   var monthCal = document.getElementById('monthCalendar');
   if (monthCal) {
     var calMonth = monthCal.getAttribute('data-month');
@@ -782,22 +797,16 @@
       var dotsWrap = cell.querySelector('.cal-dots');
       var tagEl = card.querySelector('.post-tags .tag');
       if (!dotsWrap || !tagEl) return;
-      var colorCls = ['azul','neon','laranja','chumbo','outline'].find(function(c){
+      var colorCls = ['azul','neon','laranja','chumbo','outline','outline-neon'].find(function(c){
         return tagEl.classList.contains(c);
       });
       if (!colorCls) return;
       if (colorCls === 'chumbo' && dateEl.textContent.indexOf('Story') !== -1) colorCls = 'story';
-      var textLabels = { chumbo: 'post', story: 'story', outline: 'collab' };
-      if (textLabels[colorCls]) {
-        var tagSpan = document.createElement('span');
-        tagSpan.className = 'cal-tag ' + textLabels[colorCls];
-        tagSpan.textContent = textLabels[colorCls];
-        dotsWrap.appendChild(tagSpan);
-      } else {
-        var dot = document.createElement('span');
-        dot.className = 'cal-dot ' + colorCls;
-        dotsWrap.appendChild(dot);
-      }
+      var textLabels = { chumbo:'post', story:'story', outline:'collab', azul:'email', neon:'wtpp', laranja:'sms', 'outline-neon':'vip' };
+      var tagSpan = document.createElement('span');
+      tagSpan.className = 'cal-tag ' + colorCls;
+      tagSpan.textContent = textLabels[colorCls] || colorCls;
+      dotsWrap.appendChild(tagSpan);
     });
   }
 

@@ -168,6 +168,17 @@
   .thumb.vip-thumb{ display:flex; align-items:center; justify-content:center; background:transparent; border:1.5px dashed var(--neon); aspect-ratio:3/4; color:var(--chumbo); }
   .thumb.vip-thumb svg{ width:32px; height:32px; }
     .thumb.thumb-square{ aspect-ratio:1/1; object-fit:cover; }
+  .thumb-carousel{ position:relative; width:100%; aspect-ratio:3/4; overflow:hidden; background:var(--line); }
+  .thumb-carousel .thumb{ position:absolute; inset:0; width:100%; height:100%; opacity:0; transition:opacity .2s ease; }
+  .thumb-carousel .thumb.active{ opacity:1; }
+  .car-nav{ position:absolute; top:50%; transform:translateY(-50%); width:22px; height:22px; border-radius:50%; border:none; background:rgba(0,0,0,.4); color:#fff; font-size:13px; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; padding:0; }
+  .car-prev{ left:6px; }
+  .car-next{ right:6px; }
+  .car-dots{ position:absolute; bottom:7px; left:0; right:0; display:flex; justify-content:center; gap:4px; z-index:2; }
+  .car-dot{ width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.55); border:none; padding:0; cursor:pointer; }
+  .car-dot.active{ background:#fff; }
+  .reels-link{ display:inline-flex; align-items:center; gap:4px; font-family:'Space Grotesk', sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--chumbo); text-decoration:none; border-bottom:1px solid var(--chumbo); width:fit-content; }
+  .reels-link svg{ width:11px; height:11px; flex:none; }
   .wtpp-btn{
     display:inline-block; margin-top:6px; padding:4px 10px; border-radius:999px;
     background:var(--chumbo); color:var(--off-white); font-family:'Space Grotesk', sans-serif;
@@ -854,6 +865,23 @@
 
 </div>
 <script>
+  function carouselMove(btn, dir){
+    var car = btn.closest('.thumb-carousel');
+    var imgs = Array.prototype.slice.call(car.querySelectorAll('.thumb'));
+    var dots = Array.prototype.slice.call(car.querySelectorAll('.car-dot'));
+    var i = imgs.findIndex(function(im){ return im.classList.contains('active'); });
+    i = (i + dir + imgs.length) % imgs.length;
+    imgs.forEach(function(im, n){ im.classList.toggle('active', n === i); });
+    dots.forEach(function(d, n){ d.classList.toggle('active', n === i); });
+  }
+  function carouselGoto(dot, idx){
+    var car = dot.closest('.thumb-carousel');
+    var imgs = Array.prototype.slice.call(car.querySelectorAll('.thumb'));
+    var dots = Array.prototype.slice.call(car.querySelectorAll('.car-dot'));
+    imgs.forEach(function(im, n){ im.classList.toggle('active', n === idx); });
+    dots.forEach(function(d, n){ d.classList.toggle('active', n === idx); });
+  }
+
   document.querySelectorAll('.tp-card[data-count-tag]').forEach(function(card){
     var cls = card.getAttribute('data-count-tag');
     var text = card.getAttribute('data-count-text');

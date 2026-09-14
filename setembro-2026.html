@@ -74,6 +74,14 @@
   .standby-list li strong{ font-family:'Space Grotesk', sans-serif; }
   .standby-list li .standby-note{ color:var(--muted); font-style:italic; }
 
+  .cost-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .cost-list li{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-size:13px; color:var(--chumbo); padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .cost-list li:last-child{ border-bottom:none; padding-bottom:0; }
+  .cost-list .cost-note{ color:var(--muted); font-style:italic; font-size:12px; }
+  .cost-list .cost-value{ font-family:'Space Grotesk', sans-serif; font-weight:700; white-space:nowrap; flex:none; }
+  .cost-total{ display:flex; justify-content:space-between; margin-top:14px; padding-top:14px; border-top:1.5px solid var(--chumbo); font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:14px; }
+  .cost-empty{ font-size:13px; color:var(--muted); font-style:italic; }
+
   /* ---------- PILARES DA CAMPANHA (colunas manuais) ---------- */
   .pillar-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px; }
   .pillar-card{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px 14px; display:flex; flex-direction:column; gap:8px; }
@@ -468,6 +476,18 @@
         <div class="tp-bottom"><span class="name">Grupo VIP WhatsApp</span><span class="count">0</span></div>
       </div>
     </div>
+    </div>
+  </details>
+
+  <details class="section week-toggle" open>
+    <summary class="week-summary"><span class="week-marker-group"><span class="marker">$</span><span class="week-arrow">▾</span></span><span class="week-text-group"><span class="week-title">Custo mensal</span><span class="week-range-inline">Disparos pagos do mês — geralmente só WhatsApp.</span></span></summary>
+    <div class="section-inner">
+    <ul class="cost-list">
+      <li><span>14/09 · WhatsApp · Relógio 1</span><span class="cost-value">R$ 1.176</span></li>
+      <li><span>14/09 · SMS · Reforço Relógio</span><span class="cost-value">666 coins</span></li>
+      <li><span>28/09 · WhatsApp · Relógio 2 <span class="cost-note">(estimado, ainda não confirmado)</span></span><span class="cost-value">~R$ 2.000</span></li>
+    </ul>
+    <div class="cost-total"><span>Total confirmado em reais</span><span>R$ 1.176</span></div>
     </div>
   </details>
 

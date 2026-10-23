@@ -224,7 +224,7 @@
   .status.producao{ background:transparent; color:var(--muted); border:1px solid var(--line); }
   .status.enviado{ background:var(--neon); color:var(--chumbo); }
   .status.agendado{ background:transparent; color:var(--azul); border:1px solid var(--azul); }
-  .status.aprovado{ background:var(--neon); color:var(--chumbo); }
+  .status.aprovado{ background:var(--azul); color:#fff; }
   .status.ajuste{ background:transparent; color:var(--laranja); border:1px solid var(--laranja); }
 
   /* ---------- TERRITÓRIOS DO MÊS (agrupamento automático por tema/território) ---------- */
@@ -461,10 +461,9 @@
     <ul class="cost-list">
       <li><span>07/10 · WhatsApp · Promo do 2º par</span><span class="cost-value">R$ 1.007,60</span></li>
       <li><span>09/10 · WhatsApp · Relógio 1 <span class="cost-note">(projeção, não contabilizado)</span></span><span class="cost-value">R$ 1.451,20</span></li>
-      <li><span>23/10 · WhatsApp · Relógio 2 <span class="cost-note">(projeção, não contabilizado)</span></span><span class="cost-value">R$ 317,20</span></li>
     </ul>
     <div class="cost-total"><span>Total confirmado em reais</span><span>R$ 1.007,60</span></div>
-    <div class="cost-total" style="border-top:none;margin-top:6px;padding-top:0;font-weight:600;color:var(--muted)"><span>Projeção do mês (orçamento R$ 3.000, folga de R$ 224,00)</span><span>R$ 2.776,00</span></div>
+    <div class="cost-total" style="border-top:none;margin-top:6px;padding-top:0;font-weight:600;color:var(--muted)"><span>Projeção do mês (orçamento R$ 3.000, folga de R$ 541,20)</span><span>R$ 2.458,80</span></div>
     </div>
   </details>
 
@@ -766,29 +765,12 @@
           </div>
         </div>
         <div class="post-card">
-          <div class="thumb empty">Sem imagem<br>ainda</div>
-          <div class="post-body">
-            <div class="post-date">22/10 · Story</div>
-            <div class="post-caption placeholder">Tema a definir.</div>
-            <div class="post-tags"><span class="tag chumbo">Story Orgânico</span><span class="status producao">Em produção</span></div>
-          </div>
-        </div>
-        <div class="post-card">
           <div class="thumb email-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg></div>
           <div class="post-body">
             <div class="post-date">23/10 · E-mail</div>
             <div class="post-title">Email - Relógio (2º do mês)</div>
             <div class="post-caption placeholder">Segundo relógio/contagem regressiva do mês; produtos e desconto a definir. Copy a escrever.</div>
-            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="status producao">Em produção</span></div>
-          </div>
-        </div>
-        <div class="post-card">
-          <div class="thumb whatsapp-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4A8.5 8.5 0 0 1 4 12a8.4 8.4 0 0 1 14.6-5.7A8.3 8.3 0 0 1 21 11.5z"/><path d="M8 12l2 2 4-4"/></svg></div>
-          <div class="post-body">
-            <div class="post-date">23/10 · WhatsApp</div>
-            <div class="post-title">Wtpp | Relógio 2 · Todo o site com 15% OFF</div>
-            <div class="post-caption placeholder">Duração: 48h. Público: Possível Leal (45–120 dias). 793 contatos — R$ 317,20 (projeção de gasto).</div>
-            <div class="post-tags"><span class="tag neon">WhatsApp</span><span class="tag territorio">Venda</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag azul">E-mail</span><span class="tag territorio">Venda</span><span class="status enviado">Enviado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -809,7 +791,7 @@
               <summary><span class="cap-show">Ver legenda</span><span class="cap-hide">Ocultar legenda</span><span class="cap-arrow">▾</span></summary>
               <div class="post-caption">Cada um no seu passo, os dois no mesmo ritmo.<br><br>Os tênis da FOT são unissex: servem nele, nela e em quem quiser pisar do jeito que mais combina. Estilos diferentes, a mesma base: sola flexível, pisada natural e o pé livre para seguir o passo de quem anda ao lado.<br><br>Experimente sentir tudo.<br><br>#FeetOfTomorrow #CalçadoBarefoot #Unissex #EstiloUrbano #LiberdadeDosPés</div>
             </details>
-            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag territorio">Moda</span><span class="tag produto">Urban</span><span class="tag produto">Lito</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag chumbo">Post Orgânico</span><span class="tag territorio">Moda</span><span class="tag produto">Urban</span><span class="tag produto">Lito</span><span class="status publicado">Publicado</span></div>
           </div>
         </div>
         <div class="post-card">
@@ -823,9 +805,17 @@
         <div class="post-card">
           <div class="thumb influencer-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
           <div class="post-body">
+            <div class="post-date">24/10 · Collab</div>
+            <div class="post-title">@anatsch_</div>
+            <div class="post-tags"><span class="tag outline">Collab</span><span class="tag territorio">Yoga</span><span class="status aprovado">Aprovado</span></div>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="thumb influencer-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+          <div class="post-body">
             <div class="post-date">25/10 · Collab</div>
             <div class="post-title">Iasmin</div>
-            <div class="post-tags"><span class="tag outline">Collab</span><span class="status producao">Em produção</span></div>
+            <div class="post-tags"><span class="tag outline">Collab</span><span class="tag territorio">Yoga</span><span class="status aprovado">Aprovado</span></div>
           </div>
         </div>
       </div>
